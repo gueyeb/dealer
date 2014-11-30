@@ -1,4 +1,3 @@
-[![Dependency Status](https://gemnasium.com/BigGillyStyle/dealer.svg)](https://gemnasium.com/BigGillyStyle/dealer)
 [![Code Climate](https://codeclimate.com/github/BigGillyStyle/dealer/badges/gpa.svg)](https://codeclimate.com/github/BigGillyStyle/dealer)
 [![Test Coverage](https://codeclimate.com/github/BigGillyStyle/dealer/badges/coverage.svg)](https://codeclimate.com/github/BigGillyStyle/dealer)
 [![Build Status](https://travis-ci.org/BigGillyStyle/dealer.svg?branch=master)](https://travis-ci.org/BigGillyStyle/dealer)
