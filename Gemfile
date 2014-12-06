@@ -16,6 +16,7 @@ gem 'high_voltage'
 gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'awesome-print'
 
 group :development do
   gem 'better_errors'
