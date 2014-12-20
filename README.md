@@ -28,7 +28,7 @@ Ruby on Rails
 This application requires:
 
 - Ruby 2.1.5
-- Rails 4.1.8
+- Rails 4.2.0
 
 Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
