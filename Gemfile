@@ -18,6 +18,7 @@ gem 'unicorn'
 gem 'unicorn-rails'
 gem 'awesome_print'
 gem 'newrelic_rpm'
+gem 'rollbar'
 
 group :development do
   gem 'better_errors'
