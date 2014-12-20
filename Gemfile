@@ -17,6 +17,7 @@ gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
 gem 'awesome_print'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'better_errors'
