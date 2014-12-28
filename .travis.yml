@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.1.5
+- 2.2.0
 before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres
@@ -15,5 +15,5 @@ bundler_args: "--without production"
 deploy:
   provider: heroku
   api_key:
-    secure: clsiS/+j6MiPznUEMu3Ve9X4lsDj+iAel504Z33pX3pyXhdmulumnWqT3j1N8Z0ix1h+HkSiPfpmxeDnacWaisZkfKhJl4kVXBngCf/d1xykcsCmcSmUldoWzuVVu3+0v0aNrWiEKW7nHqHnnGdBkCR6DxhRsqsWJJFYYWo0qbA=
-  app: moffittautosales
+    secure: jSC7sHoFa0VVePWhj5HYH3N43xtB60OJ80eZ9XYI4kTdrcFhq3KZWBdrpkDovBtSKJKIKKaMWY7t2DgdKuacV3Kk9Rm8x21VJ0ULkOYw7TuRExqoAvnRC+eA2BWhHYJXTq2Sk79Gu1XRBJ4N74ATiLUh5iEafYyYP6yMNqTWDRw=
+  app: moffitt
