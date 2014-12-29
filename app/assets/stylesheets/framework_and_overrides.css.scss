@@ -4,7 +4,9 @@
 @import "bootstrap";
 
 // Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
+body {
+  padding-top: 60px;
+}
 
 @import "bootswatch/slate/bootswatch";
 
@@ -39,16 +41,14 @@ body { padding-top: 60px; }
 //  }
 //// apply styles to HTML elements
 //// to make views framework-neutral
-//main {
-//  @extend .container;
-//  padding-bottom: 80px;
-//  width: 100%;
-//  margin-top: 51px; // accommodate the navbar
-//  }
-//section {
-//  @extend .row;
-//  margin-top: 20px;
-//  }
+main {
+  @extend .container;
+  margin-top: 20px; // accommodate the navbar
+}
+
+section {
+  @extend .row;
+}
 
 // Styles for form views
 // using Bootstrap
@@ -58,28 +58,35 @@ body { padding-top: 60px; }
   max-width: 320px;
   margin: 0 auto;
 }
+
 .authform form {
   @extend .well;
   @extend .well-lg;
   padding-bottom: 40px;
 }
+
 .authform .right {
   float: right !important;
 }
+
 .authform .button {
   @extend .btn;
   @extend .btn-primary;
 }
+
 .authform fieldset {
   @extend .well;
 }
+
 #error_explanation {
   @extend .alert;
   @extend .alert-danger;
 }
+
 #error_explanation h2 {
   font-size: 16px;
 }
+
 .button-xs {
   @extend .btn;
   @extend .btn-primary;
