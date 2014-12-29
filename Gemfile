@@ -4,13 +4,17 @@ ruby '2.2.0'
 
 gem 'rails', '4.2.0'
 
+# views
 gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
 gem 'bootstrap-sass'
-gem 'devise'
+gem 'bootswatch-rails'
 gem 'high_voltage'
+
+# other
+gem 'devise'
 gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
