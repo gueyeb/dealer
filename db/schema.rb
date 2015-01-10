@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130143118) do
+ActiveRecord::Schema.define(version: 20150110140751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -38,5 +38,25 @@ ActiveRecord::Schema.define(version: 20141130143118) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string   "vin"
+    t.integer  "year"
+    t.string   "make"
+    t.string   "model"
+    t.string   "trim"
+    t.integer  "mileage"
+    t.string   "exterior_color"
+    t.string   "interior_color"
+    t.string   "interior_material"
+    t.string   "transmission"
+    t.string   "body_style"
+    t.string   "drivetrain"
+    t.string   "engine"
+    t.text     "options"
+    t.text     "comments"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
 end
