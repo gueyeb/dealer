@@ -21,6 +21,7 @@ gem 'unicorn-rails'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
+gem 'annotate'
 
 group :development do
   gem 'better_errors'
