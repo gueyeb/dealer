@@ -1,73 +1,103 @@
-<%= form_for(@vehicle) do |f| %>
+<%= form_for(@vehicle, html: {class: 'form-horizontal'}) do |f| %>
   <% if @vehicle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
 
       <ul>
-      <% @vehicle.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @vehicle.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :vin %><br>
-    <%= f.text_field :vin %>
+  <div class="form-group">
+    <%= f.label :vin, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :vin, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :year %><br>
-    <%= f.number_field :year %>
+  <div class="form-group">
+    <%= f.label :year, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :year, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :make %><br>
-    <%= f.text_field :make %>
+  <div class="form-group">
+    <%= f.label :make, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :make, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :model %><br>
-    <%= f.text_field :model %>
+  <div class="form-group">
+    <%= f.label :model, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :model, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :trim %><br>
-    <%= f.text_field :trim %>
+  <div class="form-group">
+    <%= f.label :trim, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :trim, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :mileage %><br>
-    <%= f.number_field :mileage %>
+  <div class="form-group">
+    <%= f.label :body_style, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :body_style, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :exterior_color %><br>
-    <%= f.text_field :exterior_color %>
+  <div class="form-group">
+    <%= f.label :mileage, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :mileage, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :interior_color %><br>
-    <%= f.text_field :interior_color %>
+  <div class="form-group">
+    <%= f.label :exterior_color, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :exterior_color, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :transmission %><br>
-    <%= f.text_field :transmission %>
+  <div class="form-group">
+    <%= f.label :interior_color, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :interior_color, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :body_style %><br>
-    <%= f.text_field :body_style %>
+  <div class="form-group">
+    <%= f.label :transmission, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :transmission, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :drivetrain %><br>
-    <%= f.text_field :drivetrain %>
+  <div class="form-group">
+    <%= f.label :drivetrain, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :drivetrain, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :engine %><br>
-    <%= f.text_field :engine %>
+  <div class="form-group">
+    <%= f.label :engine, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :engine, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :options %><br>
-    <%= f.text_area :options %>
+  <div class="form-group">
+    <%= f.label :options, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :options, size: "60x4", class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :comments %><br>
-    <%= f.text_area :comments %>
+  <div class="form-group">
+    <%= f.label :comments, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :comments, size: "60x4", class: "form-control" %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit 'Submit', class: "btn btn-default" %>
+    </div>
   </div>
 <% end %>
