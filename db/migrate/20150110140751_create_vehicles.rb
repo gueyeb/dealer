@@ -9,7 +9,6 @@ class CreateVehicles < ActiveRecord::Migration
       t.integer :mileage
       t.string :exterior_color
       t.string :interior_color
-      t.string :interior_material
       t.string :transmission
       t.string :body_style
       t.string :drivetrain

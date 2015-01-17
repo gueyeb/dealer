@@ -48,15 +48,14 @@ ActiveRecord::Schema.define(version: 20150110140751) do
     t.integer  "mileage"
     t.string   "exterior_color"
     t.string   "interior_color"
-    t.string   "interior_material"
     t.string   "transmission"
     t.string   "body_style"
     t.string   "drivetrain"
     t.string   "engine"
     t.text     "options"
     t.text     "comments"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
