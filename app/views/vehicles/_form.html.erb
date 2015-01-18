@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :vin, class: "col-sm-2 control-label" %>
+    <%= f.label :vin, 'VIN', class: "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :vin, class: "form-control" %>
+      <%= f.text_field :vin, class: "form-control", required: true %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :year, class: "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :year, class: "form-control" %>
+      <%= f.text_field :year, class: "form-control", required: true %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :make, class: "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :make, class: "form-control" %>
+      <%= f.text_field :make, class: "form-control", required: true %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :model, class: "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :model, class: "form-control" %>
+      <%= f.text_field :model, class: "form-control", required: true %>
     </div>
   </div>
   <div class="form-group">
