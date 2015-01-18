@@ -12,8 +12,3 @@ addons:
   code_climate:
     repo_token: 6acb3ae469a533292083b76b2b5a27796f7ee25e9c6cdfbf81e99621047b7977
 bundler_args: "--without production"
-deploy:
-  provider: heroku
-  api_key:
-    secure: jSC7sHoFa0VVePWhj5HYH3N43xtB60OJ80eZ9XYI4kTdrcFhq3KZWBdrpkDovBtSKJKIKKaMWY7t2DgdKuacV3Kk9Rm8x21VJ0ULkOYw7TuRExqoAvnRC+eA2BWhHYJXTq2Sk79Gu1XRBJ4N74ATiLUh5iEafYyYP6yMNqTWDRw=
-  app: moffitt
