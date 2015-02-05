@@ -1,5 +1,7 @@
 class Vehicle < ActiveRecord::Base
 
+  has_many :images
+
   validates_presence_of :vin, :year, :make, :model
   validates_numericality_of :year, greater_than_or_equal_to: 1900, less_than: 2050
   validates_length_of :vin, is: 17

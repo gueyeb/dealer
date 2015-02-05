@@ -13,15 +13,21 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'high_voltage'
 
+# data
+gem 'aws-sdk'
+gem 'paperclip'
+gem 's3_direct_upload'
+gem 'pg'
+gem 'annotate'
+
 # other
 gem 'devise'
-gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
-gem 'annotate'
+gem 'sucker_punch'
 
 group :development do
   gem 'better_errors'

@@ -1,0 +1,5 @@
+<div>
+  <%= image.image_file_name %><br />
+  <%= number_to_human_size(image.image_file_size) %><br />
+  <%= link_to "Download", download_vehicle_image_path(vehicle_id: image.vehicle.id, id: image.id, filename: image.image_file_name) %>
+</div>

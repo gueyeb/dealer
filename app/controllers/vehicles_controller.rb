@@ -37,11 +37,13 @@ class VehiclesController < ApplicationController
   end
 
   private
-    def set_vehicle
-      @vehicle = Vehicle.find(params[:id])
-    end
 
-    def vehicle_params
-      params.require(:vehicle).permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments)
-    end
+  def set_vehicle
+    @vehicle = Vehicle.find(params[:id])
+  end
+
+  def vehicle_params
+    params.require(:vehicle).permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments)
+  end
+
 end

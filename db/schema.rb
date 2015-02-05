@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110140751) do
+ActiveRecord::Schema.define(version: 20150205140936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "vehicle_id",                         null: false
+    t.string   "direct_upload_url",                  null: false
+    t.boolean  "processed",          default: false, null: false
+  end
+
+  add_index "images", ["vehicle_id"], name: "index_images_on_vehicle_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,4 +81,5 @@ ActiveRecord::Schema.define(version: 20150110140751) do
     t.datetime "updated_at",     null: false
   end
 
+  add_foreign_key "images", "vehicles"
 end

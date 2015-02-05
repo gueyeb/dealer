@@ -1,4 +1,11 @@
-class Contact < ActiveRecord::Base
+FactoryGirl.define do
+  factory :contact do
+    name "MyString"
+email "MyString"
+subject "MyString"
+message "MyText"
+  end
+
 end
 
 # == Schema Information
