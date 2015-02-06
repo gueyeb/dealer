@@ -14,7 +14,7 @@ gem 'bootswatch-rails'
 gem 'high_voltage'
 
 # data
-gem 'aws-sdk'
+gem 'aws-sdk-v1'
 gem 'paperclip'
 gem 's3_direct_upload'
 gem 'pg'
