@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
 
   before_action :set_image, only: [:download]
+  before_action :ensure_admin, only: [:new, :create, :download]
 
   def create
     @image = vehicle.images.create!(image_params)

@@ -40,4 +40,5 @@ end
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  asking_price_cents :integer
+#  active             :boolean          default("false")
 #

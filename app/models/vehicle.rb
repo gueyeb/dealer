@@ -7,6 +7,8 @@ class Vehicle < ActiveRecord::Base
   validates_length_of :vin, is: 17
   validates_numericality_of :mileage, greater_than_or_equal_to: 0, less_than: 1_000_000, allow_nil: true
 
+  scope :active, -> {where(active: true)}
+
 end
 
 # == Schema Information
@@ -31,4 +33,5 @@ end
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  asking_price_cents :integer
+#  active             :boolean          default("false")
 #

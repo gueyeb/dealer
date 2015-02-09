@@ -1,10 +1,14 @@
 class VehiclesController < ApplicationController
+
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_active_vehicle, only: [:show, :edit, :update]
+  before_action :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: :new
 
   respond_to :html
 
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.active
     respond_with(@vehicles)
   end
 
@@ -22,7 +26,8 @@ class VehiclesController < ApplicationController
 
   def create
     @vehicle = Vehicle.new(vehicle_params)
-    @vehicle.save
+    @vehicle.active = true
+    @vehicle.save!
     respond_with(@vehicle)
   end
 
@@ -32,18 +37,33 @@ class VehiclesController < ApplicationController
   end
 
   def destroy
-    @vehicle.destroy
+    @vehicle.update! active: false
     respond_with(@vehicle)
   end
 
   private
 
   def set_vehicle
-    @vehicle = Vehicle.find(params[:id])
+    begin
+      @vehicle = Vehicle.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      invalid_vehicle_redirect
+    end
+  end
+
+  def ensure_active_vehicle
+    invalid_vehicle_redirect unless @vehicle.active
+  end
+
+  def invalid_vehicle_redirect
+    flash[:error] = 'That vehicle is not in inventory'
+    redirect_to root_path
   end
 
   def vehicle_params
-    params.require(:vehicle).permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments)
+    params.
+      require(:vehicle).
+      permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments)
   end
 
 end

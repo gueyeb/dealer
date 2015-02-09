@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Vehicles For Sale</h1>
 
 <% @vehicles.each do |vehicle| %>
@@ -36,6 +34,7 @@
   </div>
 <% end %>
 
-<br>
-
-<%= link_to 'New Vehicle', new_vehicle_path %>
+<% if user_signed_in? %>
+  <br>
+  <%= link_to 'New Vehicle', new_vehicle_path %>
+<% end %>
