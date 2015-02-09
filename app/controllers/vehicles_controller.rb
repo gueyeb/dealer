@@ -38,7 +38,8 @@ class VehiclesController < ApplicationController
 
   def destroy
     @vehicle.update! active: false
-    respond_with(@vehicle)
+    flash[:notice] = 'Vehicle has been removed from inventory.'
+    redirect_to root_path
   end
 
   private
