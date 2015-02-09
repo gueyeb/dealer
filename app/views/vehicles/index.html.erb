@@ -1,52 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Vehicles</h1>
+<h1>Vehicles For Sale</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Vin</th>
-      <th>Year</th>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Trim</th>
-      <th>Mileage</th>
-      <th>Exterior color</th>
-      <th>Interior color</th>
-      <th>Transmission</th>
-      <th>Body style</th>
-      <th>Drivetrain</th>
-      <th>Engine</th>
-      <th>Options</th>
-      <th>Comments</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @vehicles.each do |vehicle| %>
-      <tr>
-        <td><%= vehicle.vin %></td>
-        <td><%= vehicle.year %></td>
-        <td><%= vehicle.make %></td>
-        <td><%= vehicle.model %></td>
-        <td><%= vehicle.trim %></td>
-        <td><%= vehicle.mileage %></td>
-        <td><%= vehicle.exterior_color %></td>
-        <td><%= vehicle.interior_color %></td>
-        <td><%= vehicle.transmission %></td>
-        <td><%= vehicle.body_style %></td>
-        <td><%= vehicle.drivetrain %></td>
-        <td><%= vehicle.engine %></td>
-        <td><%= vehicle.options %></td>
-        <td><%= vehicle.comments %></td>
-        <td><%= link_to 'Show', vehicle %></td>
-        <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
-        <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @vehicles.each do |vehicle| %>
+  <div class="panel panel-default vehicle-listing">
+    <div class="panel-body">
+      <%= link_to vehicle_path(vehicle) do %>
+        <div class="title-row">
+          <div class="col-md-4 col-md-offset-4 text-center">
+            <h3><%= vehicle_title vehicle %></h3>
+          </div>
+          <div class="col-md-4 text-right">
+            <h4><%= number_to_currency (vehicle.asking_price_cents / 100) %></h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <%= image_tag(vehicle_main_image(vehicle), class: 'img-thumbnail') %>
+          </div>
+          <div class="col-md-1">
+            <div class="vehicle-label">Mileage</div><br>
+            <div class="vehicle-label">Engine</div><br>
+            <div class="vehicle-label">Trans</div><br>
+            <div class="vehicle-label">Comments</div><br>
+          </div>
+          <div class="col-md-7">
+            <div><%= vehicle.mileage %></div><br>
+            <div><%= vehicle.engine %></div><br>
+            <div><%= vehicle.transmission %></div><br>
+            <div><%= vehicle.comments %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <br>
 

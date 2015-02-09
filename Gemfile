@@ -6,6 +6,7 @@ gem 'rails', '4.2.0'
 
 # views
 gem 'sass-rails'
+gem 'compass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'
