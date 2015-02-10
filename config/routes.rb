@@ -3,11 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: :registrations
 
-  resources :vehicles, only: [:new, :index, :show]
-  resources :contacts, only: [:new, :create]
-
   authenticate :user do
-    resources :vehicles, only: [:create, :edit, :update, :destroy] do
+    resources :vehicles, only: [:new, :create, :edit, :update, :destroy] do
       resources :images, only: [:new, :create] do
         member do
           get :download
@@ -15,5 +12,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :vehicles, only: [:index, :show]
+  resources :contacts, only: [:new, :create]
 
 end

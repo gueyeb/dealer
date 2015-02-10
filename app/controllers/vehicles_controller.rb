@@ -3,7 +3,6 @@ class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   before_action :ensure_active_vehicle, only: [:show, :edit, :update]
   before_action :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: :new
 
   respond_to :html
 
