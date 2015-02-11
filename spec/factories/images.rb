@@ -19,6 +19,7 @@ end
 #  vehicle_id         :integer          not null
 #  direct_upload_url  :string           not null
 #  processed          :boolean          default("false"), not null
+#  primary            :boolean          default("false")
 #
 # Indexes
 #

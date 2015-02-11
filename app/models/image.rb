@@ -17,8 +17,9 @@ class Image < ActiveRecord::Base
     default_url: "/images/:style/missing.png"
 
   validates :direct_upload_url, presence: true, format: {with: DIRECT_UPLOAD_URL_FORMAT}
-  validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/gif", "image/png"]}
   validates :vehicle_id, presence: true
+  validates :primary, uniqueness: {scope: :vehicle}
+  validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/gif", "image/png"]}
 
   before_create :set_upload_attributes
   after_create :queue_finalize_and_cleanup
@@ -87,6 +88,7 @@ end
 #  vehicle_id         :integer          not null
 #  direct_upload_url  :string           not null
 #  processed          :boolean          default("false"), not null
+#  primary            :boolean          default("false")
 #
 # Indexes
 #

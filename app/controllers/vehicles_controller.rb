@@ -25,8 +25,9 @@ class VehiclesController < ApplicationController
 
   def create
     @vehicle = Vehicle.new(vehicle_params)
+    @vehicle.asking_price_cents = vehicle_params[:asking_price_cents] * 100
     @vehicle.active = true
-    @vehicle.save!
+    @vehicle.save
     respond_with(@vehicle)
   end
 
@@ -63,7 +64,7 @@ class VehiclesController < ApplicationController
   def vehicle_params
     params.
       require(:vehicle).
-      permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments)
+      permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments, :asking_price_cents)
   end
 
 end

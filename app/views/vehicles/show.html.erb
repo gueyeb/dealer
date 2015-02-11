@@ -1,76 +1,72 @@
-<p id="notice"><%= notice %></p>
+<div class="row text-center">
+  <h1><%= vehicle_title @vehicle %></h1>
+</div>
 
-<p>
-  <strong>Vin:</strong>
-  <%= @vehicle.vin %>
-</p>
-
-<p>
-  <strong>Year:</strong>
-  <%= @vehicle.year %>
-</p>
-
-<p>
-  <strong>Make:</strong>
-  <%= @vehicle.make %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @vehicle.model %>
-</p>
-
-<p>
-  <strong>Trim:</strong>
-  <%= @vehicle.trim %>
-</p>
-
-<p>
-  <strong>Mileage:</strong>
-  <%= @vehicle.mileage %>
-</p>
-
-<p>
-  <strong>Exterior color:</strong>
-  <%= @vehicle.exterior_color %>
-</p>
-
-<p>
-  <strong>Interior color:</strong>
-  <%= @vehicle.interior_color %>
-</p>
-
-<p>
-  <strong>Transmission:</strong>
-  <%= @vehicle.transmission %>
-</p>
-
-<p>
-  <strong>Body style:</strong>
-  <%= @vehicle.body_style %>
-</p>
-
-<p>
-  <strong>Drivetrain:</strong>
-  <%= @vehicle.drivetrain %>
-</p>
-
-<p>
-  <strong>Engine:</strong>
-  <%= @vehicle.engine %>
-</p>
-
-<p>
-  <strong>Options:</strong>
-  <%= @vehicle.options %>
-</p>
-
-<p>
-  <strong>Comments:</strong>
-  <%= @vehicle.comments %>
-</p>
+<!-- Technique from http://codepen.io/gumetis/pen/pbLyD -->
+<div class="panel panel-default vehicle-listing">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <% unless @vehicle.primary_image %>
+          <div class="text-center">
+            <i class="fa fa-car fa-5x"></i>
+            <p>Image Not Available</p>
+          </div>
+        <% else %>
+          <div id="carousel<%= @vehicle.id %>" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <div class="carousel-inner">
+              <% vehicle_images_in_display_order(@vehicle).each_with_index do |image, index| %>
+                <div class="item <%= 'active' if index == 0 %> ">
+                  <%= image_tag(image.image.url, class: 'img-responsive') %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="clearfix">
+            <div id="thumbcarousel<%= @vehicle.id %>" class="carousel slide" data-interval="false">
+              <div class="carousel-inner">
+                <% iter = 0 %>
+                <% vehicle_images_in_display_order(@vehicle).each_slice(4) do |image_array| %>
+                  <div class="item <%= 'active' if iter == 0 %>">
+                    <% image_array.each_with_index do |image, index| %>
+                      <div data-target="#carousel<%= @vehicle.id %>" data-slide-to="<%= (iter * 4) + index %>" class="thumb">
+                        <%= image_tag(image.image.url(:thumb), class: 'img-responsive') %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <% iter += 1 %>
+                <% end %>
+              </div>
+              <a class="left carousel-control" href="#thumbcarousel<%= @vehicle.id %>" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#thumbcarousel<%= @vehicle.id %>" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <div class="row text-center">
+          <h3><%= number_to_currency (@vehicle.asking_price_cents / 100) %></h3>
+        </div>
+        <% %w(vin mileage exterior_color interior_color transmission body_style drivetrain engine options comments).each do |attr| %>
+          <div class="row">
+            <div class="col-md-3 vehicle-label">
+              <%= attr.humanize.titleize %>
+            </div>
+            <div class="col-md-9">
+              <%= @vehicle.send(attr) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% if user_signed_in? %>
-  <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+  <%= link_to 'Edit Vehicle', edit_vehicle_path(@vehicle) %> |
 <% end %>
-<%= link_to 'Back', vehicles_path %>
+<%= link_to 'Back to Vehicles List', vehicles_path %>

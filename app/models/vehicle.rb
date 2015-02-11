@@ -9,6 +9,14 @@ class Vehicle < ActiveRecord::Base
 
   scope :active, -> {where(active: true)}
 
+  def primary_image
+    images.where(primary: true).first
+  end
+
+  def non_primary_images
+    images.where(primary: false)
+  end
+
 end
 
 # == Schema Information

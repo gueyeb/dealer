@@ -13,8 +13,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3">
-            <%= image_tag(vehicle_main_image(vehicle), class: 'img-thumbnail') %>
+          <div class="col-md-3 text-center">
+            <% if vehicle.primary_image %>
+              <%= image_tag(vehicle_main_image(vehicle), class: 'img-thumbnail') %>
+            <% else %>
+              <i class="fa fa-car fa-5x"></i>
+              <p>Image Not Available</p>
+            <% end %>
           </div>
           <div class="col-md-1">
             <div class="vehicle-label">Mileage</div><br>
