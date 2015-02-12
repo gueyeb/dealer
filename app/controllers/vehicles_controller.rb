@@ -25,7 +25,7 @@ class VehiclesController < ApplicationController
 
   def create
     @vehicle = Vehicle.new(vehicle_params)
-    @vehicle.asking_price_cents = vehicle_params[:asking_price_cents] * 100
+    @vehicle.asking_price_cents = vehicle_params[:asking_price_cents].to_i * 100
     @vehicle.active = true
     @vehicle.save
     respond_with(@vehicle)
