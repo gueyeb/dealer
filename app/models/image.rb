@@ -21,7 +21,19 @@ class Image < ActiveRecord::Base
   validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/gif", "image/png"]}
 
   before_create :set_upload_attributes
-  after_create :queue_finalize_and_cleanup
+
+  class << self
+
+    def complete_delete(image)
+      # delete attachment
+      image.image = nil
+      image.save!
+
+      # delete the object
+      image.destroy!
+    end
+
+  end
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
@@ -64,11 +76,6 @@ class Image < ActiveRecord::Base
     else
       raise e
     end
-  end
-
-  # Queue final file processing
-  def queue_finalize_and_cleanup
-    ImageProcessingJob.perform_later self
   end
 
 end

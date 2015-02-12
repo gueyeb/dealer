@@ -13,6 +13,10 @@ class Vehicle < ActiveRecord::Base
     images.where(primary: true).first
   end
 
+  def has_primary_image?
+    primary_image.present?
+  end
+
   def non_primary_images
     images.where(primary: false)
   end

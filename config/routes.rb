@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :vehicles, only: [:new, :create, :edit, :update, :destroy] do
-      resources :images, only: [:new, :create] do
+      resources :images, only: [:new, :create, :destroy] do
         member do
           get :download
         end

@@ -1,3 +1,23 @@
 <h1>Editing Vehicle</h1>
 
-<%= render 'form' %>
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs margin-bottom-20" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#details" aria-controls="home" role="tab" data-toggle="tab">Details</a></li>
+    <li role="presentation"><a href="#images" aria-controls="profile" role="tab" data-toggle="tab">Images</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="details">
+      <%= render 'form' %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="images">
+      <%= render 'vehicles/images' %>
+    </div>
+  </div>
+
+</div>
+

@@ -27,8 +27,10 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new(vehicle_params)
     @vehicle.asking_price_cents = vehicle_params[:asking_price_cents].to_i * 100
     @vehicle.active = true
-    @vehicle.save
-    respond_with(@vehicle)
+    @vehicle.save!
+
+    flash[:notice] = 'Vehicle successfully created!'
+    redirect_to(new_vehicle_image_path(@vehicle))
   end
 
   def update

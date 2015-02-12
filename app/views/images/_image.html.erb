@@ -1,5 +1,29 @@
-<div>
-  <%= image.image_file_name %><br />
-  <%= number_to_human_size(image.image_file_size) %><br />
-  <%= link_to "Download", download_vehicle_image_path(vehicle_id: image.vehicle.id, id: image.id, filename: image.image_file_name) %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <% url = image.processed ? image.image.url(:medium) : image.direct_upload_url %>
+        <%= image_tag(url, class: 'img-responsive') %>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3 vehicle-label">File Name:</div>
+          <div class="col-md-9"><%= image.image_file_name %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 vehicle-label">File Size:</div>
+          <div class="col-md-9"><%= number_to_human_size(image.image_file_size) %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 vehicle-label">Download Link:</div>
+          <div class="col-md-9"><%= link_to 'Download', download_vehicle_image_path(vehicle_id: image.vehicle.id, id: image.id, filename: image.image_file_name) %></div>
+        </div>
+        <% if local_assigns[:show_delete] %>
+          <div class="row">
+            <%= button_to 'Delete Image', {controller: 'images', action: 'destroy', vehicle_id: image.vehicle.id, id: image.id}, {method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

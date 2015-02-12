@@ -1,0 +1,14 @@
+<div class="row margin-vert-10">
+  <div class="col-md-2"><%= label %></div>
+  <div class="col-md-10">
+    <%= s3_uploader_form id: "s3-uploader#{'-primary' if local_assigns[:primary]}",
+      callback_url: vehicle_images_url(vehicle, primary: local_assigns[:primary]),
+      callback_param: "image[direct_upload_url]",
+      expiration: 24.hours.from_now.utc.iso8601,
+      max_file_size: 10.megabytes do %>
+      <%= file_field_tag :file, multiple: !local_assigns[:primary] %>
+    <% end %>
+  </div>
+</div>
+
+<div id="uploads_container<%= '_primary' if local_assigns[:primary] %>" class="row"></div>

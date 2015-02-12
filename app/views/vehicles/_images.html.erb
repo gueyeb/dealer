@@ -1,0 +1,35 @@
+<p class="bg-primary text-center padding-10">Primary Image</p>
+
+<% if @vehicle.has_primary_image? %>
+  <%= render partial: 'images/image',
+    locals: {
+      image: @vehicle.primary_image,
+      show_delete: true
+    } %>
+<% else %>
+  <%= render partial: 'images/s3_upload_form',
+    locals: {
+      vehicle: @vehicle,
+      primary: true,
+      label: 'Add Primary Image:'
+    } %>
+<% end %>
+
+<p class="bg-primary text-center margin-top-50 padding-10">Other Images</p>
+
+<%= render partial: 'images/s3_upload_form',
+  locals: {
+    vehicle: @vehicle,
+    primary: false,
+    label: 'Add Images:'
+  } %>
+
+<% @vehicle.non_primary_images.each do |image| %>
+  <%= render partial: 'images/image',
+    locals: {
+      image: image,
+      show_delete: true
+    } %>
+<% end %>
+
+<%= render 'images/template_upload' %>

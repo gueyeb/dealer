@@ -1,10 +1,21 @@
 class ImagesController < ApplicationController
 
-  before_action :set_image, only: [:download]
+  before_action :set_image, only: [:destroy, :download]
+  before_action :set_vehicle, except: [:download]
   before_action :ensure_admin, only: [:new, :create, :download]
 
+  def new
+    redirect_to(edit_vehicle_path(@vehicle)) if @vehicle.images.present?
+  end
+
   def create
-    @image = vehicle.images.create!(image_params)
+    @image = Images::Create.new(@vehicle, image_params.merge(primary: params[:primary])).call
+  end
+
+  def destroy
+    Image.complete_delete(@image)
+
+    redirect_to(edit_vehicle_path(@vehicle))
   end
 
   def download
@@ -21,8 +32,8 @@ class ImagesController < ApplicationController
     params.require(:image).permit(:direct_upload_url)
   end
 
-  def vehicle
-    Vehicle.find(params[:vehicle_id])
+  def set_vehicle
+    @vehicle = Vehicle.find(params[:vehicle_id])
   end
 
 end
