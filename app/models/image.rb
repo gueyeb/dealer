@@ -18,7 +18,6 @@ class Image < ActiveRecord::Base
 
   validates :direct_upload_url, presence: true, format: {with: DIRECT_UPLOAD_URL_FORMAT}
   validates :vehicle_id, presence: true
-  validates :primary, uniqueness: {scope: :vehicle}
   validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/gif", "image/png"]}
 
   before_create :set_upload_attributes
