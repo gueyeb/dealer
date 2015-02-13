@@ -24,8 +24,8 @@ gem 'annotate'
 
 # other
 gem 'devise'
-gem 'unicorn'
-gem 'unicorn-rails'
+gem 'puma'
+gem 'rack-timeout'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
