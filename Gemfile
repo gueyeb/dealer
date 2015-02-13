@@ -30,6 +30,7 @@ gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
 gem 'sucker_punch'
+gem 'money-rails'
 
 group :development do
   gem 'better_errors'
