@@ -8,16 +8,13 @@ class VehiclesController < ApplicationController
 
   def index
     @vehicles = Vehicle.active
-    respond_with(@vehicles)
   end
 
   def show
-    respond_with(@vehicle)
   end
 
   def new
     @vehicle = Vehicle.new
-    respond_with(@vehicle)
   end
 
   def edit
@@ -33,8 +30,8 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle.update(vehicle_params)
-    respond_with(@vehicle)
+    @vehicle.update!(vehicle_params)
+    render :show
   end
 
   def destroy
