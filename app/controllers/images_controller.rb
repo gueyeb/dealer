@@ -13,8 +13,7 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    Image.complete_delete(@image)
-
+    Images::Delete.new(@image).call
     redirect_to(edit_vehicle_path(@vehicle))
   end
 

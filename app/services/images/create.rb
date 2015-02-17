@@ -7,6 +7,8 @@ module Images
     end
 
     def call
+      direct_upload_url = CGI.unescape(image_attrs[:direct_upload_url])
+      image_attrs.merge!(Images::GetUploadAttrs.new(direct_upload_url).call)
       image = @vehicle.images.create! image_attrs
       ImageProcessingJob.perform_later image
       image
