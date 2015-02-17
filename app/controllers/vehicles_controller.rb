@@ -10,32 +10,23 @@ class VehiclesController < ApplicationController
     @vehicles = Vehicle.active
   end
 
-  def show
-  end
-
   def new
     @vehicle = Vehicle.new
   end
 
-  def edit
-  end
-
   def create
-    @vehicle = Vehicle.new(vehicle_params)
-    @vehicle.active = true
-    @vehicle.save!
-
+    @vehicle = Vehicles::Create.new(vehicle_params).call
     flash[:notice] = 'Vehicle successfully created!'
     redirect_to(new_vehicle_image_path(@vehicle))
   end
 
   def update
-    @vehicle.update!(vehicle_params)
+    Vehicles::Update.new(@vehicle, vehicle_params).call
     render :show
   end
 
   def destroy
-    @vehicle.update! active: false
+    Vehicles::Delete.new(@vehicle).call
     flash[:notice] = 'Vehicle has been removed from inventory.'
     redirect_to root_path
   end
