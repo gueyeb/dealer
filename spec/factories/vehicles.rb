@@ -13,10 +13,10 @@ end
 # Table name: vehicles
 #
 #  id                 :integer          not null, primary key
-#  vin                :string
-#  year               :integer
-#  make               :string
-#  model              :string
+#  vin                :string           not null
+#  year               :integer          not null
+#  make               :string           not null
+#  model              :string           not null
 #  trim               :string
 #  mileage            :integer
 #  exterior_color     :string
@@ -30,5 +30,5 @@ end
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  asking_price_cents :integer
-#  active             :boolean          default("false")
+#  active             :boolean          default("true")
 #
