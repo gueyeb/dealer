@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :image do
-    
+    vehicle
+    direct_upload_url "https://dealer-test.s3.amazonaws.com%2Fuploads%2F1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497%2F2015_01_01_006.jpg"
   end
 
 end
