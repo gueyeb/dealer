@@ -75,6 +75,18 @@ RSpec.describe Vehicle, :type => :model do
         expect(image.vehicle.primary_image).to eq(image)
       end
     end
+
+    describe '#has_primary_image?' do
+      it 'should indicate vehicle has primary image' do
+        image = create(:image, primary: true)
+        expect(image.vehicle.has_primary_image?).to be_truthy
+      end
+
+      it 'should indicate vehicle does NOT have primary image' do
+        image = create(:image)
+        expect(image.vehicle.has_primary_image?).to be_falsey
+      end
+    end
   end
 end
 
