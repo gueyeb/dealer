@@ -57,6 +57,16 @@ RSpec.describe Vehicle, :type => :model do
       end
     end
   end
+
+  context 'when queried by scopes' do
+    it '.active should return only active vehicles' do
+      active_vehicle = create(:vehicle)
+      inactive_vehicle = create(:vehicle, active: false)
+      vehicles = Vehicle.active
+      expect(vehicles).to include(active_vehicle)
+      expect(vehicles).to_not include(inactive_vehicle)
+    end
+  end
 end
 
 # == Schema Information

@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :vehicle do
-    vin Faker::Lorem.characters(17)
+    vin { Faker::Lorem.characters(17) }
     year { 1900 + rand(150) }
-    make Faker::Name.first_name
-    model Faker::Name.last_name
+    make { Faker::Name.first_name }
+    model { Faker::Name.last_name }
   end
 
 end
