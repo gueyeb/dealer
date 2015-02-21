@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Vehicle, :type => :model do
-  context 'when validating' do
+  describe 'validations' do
     it "should default 'active' to true" do
       vehicle = build(:vehicle)
       expect(vehicle.active).to be_truthy
@@ -15,7 +15,7 @@ RSpec.describe Vehicle, :type => :model do
       end
     end
 
-    context 'the allowed values of year' do
+    context 'year' do
       it 'is invalid for years before 1900' do
         vehicle = build(:vehicle, year: 1899)
         vehicle.valid?
@@ -29,7 +29,7 @@ RSpec.describe Vehicle, :type => :model do
       end
     end
 
-    context 'the allowed length of vin' do
+    context 'vin' do
       it 'is invalid for less than 17 characters' do
         vehicle = build(:vehicle, vin: '1234567890123456')
         vehicle.valid?
@@ -43,7 +43,7 @@ RSpec.describe Vehicle, :type => :model do
       end
     end
 
-    context 'the allowed mileage values' do
+    context 'mileage' do
       it 'is invalid for negative mileage values' do
         vehicle = build(:vehicle, mileage: -1)
         vehicle.valid?
@@ -58,13 +58,22 @@ RSpec.describe Vehicle, :type => :model do
     end
   end
 
-  context 'when queried by scopes' do
+  describe 'scopes' do
     it '.active should return only active vehicles' do
       active_vehicle = create(:vehicle)
       inactive_vehicle = create(:vehicle, active: false)
       vehicles = Vehicle.active
       expect(vehicles).to include(active_vehicle)
       expect(vehicles).to_not include(inactive_vehicle)
+    end
+  end
+
+  describe 'instance methods' do
+    describe '#primary_image' do
+      it 'should return the first primary image' do
+        image = create(:image, primary: true)
+        expect(image.vehicle.primary_image).to eq(image)
+      end
     end
   end
 end
