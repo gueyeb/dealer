@@ -87,6 +87,18 @@ RSpec.describe Vehicle, :type => :model do
         expect(image.vehicle.has_primary_image?).to be_falsey
       end
     end
+
+    describe '#non_primary_images' do
+      it 'should contain images that are not primary' do
+        image = create(:image)
+        expect(image.vehicle.non_primary_images).to include(image)
+      end
+
+      it 'should NOT contain primary images' do
+        image = create(:image, primary: true)
+        expect(image.vehicle.non_primary_images).to_not include(image)
+      end
+    end
   end
 end
 
