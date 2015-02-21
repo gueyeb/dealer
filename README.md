@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/BigGillyStyle/dealer.svg?branch=master)](https://travis-ci.org/BigGillyStyle/dealer)
 [![Dependency Status](https://gemnasium.com/BigGillyStyle/dealer.svg)](https://gemnasium.com/BigGillyStyle/dealer)
 [![security](https://hakiri.io/github/BigGillyStyle/dealer/master.svg)](https://hakiri.io/github/BigGillyStyle/dealer/master)
+[![License](http://img.shields.io/license/MIT.png?color=green)](http://opensource.org/licenses/MIT)
 
 Dealer
 ================
