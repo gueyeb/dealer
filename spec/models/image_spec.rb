@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Image, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'validations' do
+    [:direct_upload_url, :vehicle_id].each do |attr|
+      it "is invalid when #{attr} is not provided" do
+        image = build(:image, attr => nil)
+        image.valid?
+        expect(image.errors[attr]).to include("can't be blank")
+      end
+    end
+  end
+
 end
 
 # == Schema Information
