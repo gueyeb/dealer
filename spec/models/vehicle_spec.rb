@@ -8,12 +8,12 @@ RSpec.describe Vehicle, :type => :model do
     expect(vehicle).to monetize(:asking_price_cents)
   end
 
-  describe 'validations' do
-    it "should default 'active' to true" do
-      vehicle = build(:vehicle)
-      expect(vehicle.active).to be_truthy
-    end
+  it "should default 'active' to true" do
+    vehicle = build(:vehicle)
+    expect(vehicle.active).to be_truthy
+  end
 
+  describe 'validations' do
     [:vin, :year, :make, :model].each do |attr|
       it "is invalid when #{attr} is not provided" do
         vehicle = build(:vehicle, attr => nil)

@@ -18,6 +18,29 @@ RSpec.describe Image, :type => :model do
     end
   end
 
+  describe 'instance methods' do
+    describe 'direct_upload_url=' do
+      it 'unescapes the direct_upload_url provided by S3' do
+        escaped_url = "https://dealer-test.s3.amazonaws.com%2Fuploads%2F1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497%2F2015_01_01_006.jpg"
+        unescaped_url = "https://dealer-test.s3.amazonaws.com/uploads/1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497/2015_01_01_006.jpg"
+        image = build(:image, direct_upload_url: escaped_url)
+        expect(image.direct_upload_url).to eq(unescaped_url)
+      end
+    end
+
+    describe '#post_processing_required?' do
+      it 'indicates post processing IS required' do
+        image = build(:image, image_content_type: 'image/jpeg')
+        expect(image.post_process_required?).to be_truthy
+      end
+
+      it 'indicates post processing is NOT required' do
+        image = build(:image, image_content_type: 'image/doc')
+        expect(image.post_process_required?).to be_falsey
+      end
+    end
+  end
+
 end
 
 # == Schema Information
