@@ -10,6 +10,12 @@ RSpec.describe Image, :type => :model do
         expect(image.errors[attr]).to include("can't be blank")
       end
     end
+
+    it "doesn't allow invalid upload URLs" do
+      image = build(:image, direct_upload_url: "http://www.mymaliciousurl.com")
+      image.valid?
+      expect(image.errors[:direct_upload_url]).to include("is invalid")
+    end
   end
 
 end
