@@ -13,5 +13,12 @@ RSpec.describe VehiclesController, type: :controller do
       get :index
       expect(assigns(:vehicles)).to match_array([vehicle1, vehicle2])
     end
+
+    it 'does NOT list inactive vehicles' do
+      vehicle1 = create :vehicle
+      inactive_vehicle = create(:vehicle, active: false)
+      get :index
+      expect(assigns(:vehicles)).to_not include(inactive_vehicle)
+    end
   end
 end
