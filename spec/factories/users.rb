@@ -1,9 +1,19 @@
 FactoryGirl.define do
   factory :user do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+    sign_in_count 0
+
+    factory :admin do
+      email 'user@example.com'
+    end
+  end
+
+  factory :registered_user, class: User do
     confirmed_at Time.now
-    name "Test User"
-    email "test@example.com"
-    password "please123"
+    name 'Test User'
+    email 'test@example.com'
+    password 'please123'
   end
 end
 

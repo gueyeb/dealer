@@ -1,13 +1,12 @@
 describe User do
 
-  before(:each) { @user = User.new(email: 'user@example.com') }
-
-  subject { @user }
-
-  it { should respond_to(:email) }
-
-  it "#email returns a string" do
-    expect(@user.email).to match 'user@example.com'
+  describe 'instance methods' do
+    describe '#admin?' do
+      it 'should indicate that a user is NOT an admin' do
+        user = build(:user)
+        expect(user.admin?).to be_falsey
+      end
+    end
   end
 
 end
