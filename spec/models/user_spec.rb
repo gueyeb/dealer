@@ -6,6 +6,11 @@ describe User do
         user = build(:user)
         expect(user.admin?).to be_falsey
       end
+
+      it 'should indicate that a user IS an admin' do
+        user = build(:admin)
+        expect(user.admin?).to be_truthy
+      end
     end
   end
 
