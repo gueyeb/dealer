@@ -16,10 +16,11 @@ RSpec.describe VehiclesController, type: :controller do
       end
 
       it 'does NOT list inactive vehicles' do
-        vehicle1 = create :vehicle
+        active_vehicle = create(:vehicle, active: true)
         inactive_vehicle = create(:vehicle, active: false)
         get :index
         expect(assigns(:vehicles)).to_not include(inactive_vehicle)
+        expect(assigns(:vehicles)).to include(active_vehicle)
       end
     end
 
@@ -37,4 +38,42 @@ RSpec.describe VehiclesController, type: :controller do
       end
     end
   end
+
+  context 'authenticated actions' do
+    context 'non-admin users' do
+      {new: :get, create: :post}.each do |action, meth|
+        it "prevents non-admin users from accessing the #{action} action" do
+          send(meth, action)
+          expect(response).to redirect_to(root_url)
+          expect(flash[:error]).to match(/^You are not an admin/)
+        end
+      end
+
+      {edit: :get, update: :patch, destroy: :delete}.each do |action, meth|
+        it "prevents non-admin users from accessing the #{action} action" do
+          vehicle = create(:vehicle)
+          send(meth, action, id: vehicle.id)
+          expect(response).to redirect_to(root_url)
+          expect(flash[:error]).to match(/^You are not an admin/)
+        end
+      end
+    end
+
+    context 'admin users' do
+      login_admin
+
+      describe 'GET #new' do
+        it 'renders the :new template' do
+          get :new
+          expect(response).to render_template(:new)
+        end
+
+        it 'assigns a new Vehicle to @vehicle' do
+          get :new
+          expect(assigns(:vehicle)).to be_a_new(Vehicle)
+        end
+      end
+    end
+  end
+
 end

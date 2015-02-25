@@ -35,6 +35,7 @@ module Dealer
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.active_job.queue_adapter = :sucker_punch
+    queue_adapter = Rails.env.test? ? :inline : :sucker_punch
+    config.active_job.queue_adapter = queue_adapter
   end
 end
