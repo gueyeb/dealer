@@ -73,6 +73,12 @@ RSpec.describe VehiclesController, type: :controller do
           expect(assigns(:vehicle)).to be_a_new(Vehicle)
         end
       end
+
+      describe 'POST #create' do
+        context 'with invalid attributes' do
+
+        end
+      end
     end
   end
 

@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :vehicle do
     vin { Faker::Lorem.characters(17) }
     year { 1900 + rand(150) }
