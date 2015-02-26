@@ -56,7 +56,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
-  gem 'rspec-rails', '3.2.0'
+  gem 'rspec-rails'
 end
 
 group :production do
