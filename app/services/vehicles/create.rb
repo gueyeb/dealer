@@ -9,7 +9,7 @@ module Vehicles
     def call
       vehicle = Vehicle.new(vehicle_attrs)
       vehicle.active = true
-      vehicle.save!
+      vehicle.save
       vehicle
     end
 

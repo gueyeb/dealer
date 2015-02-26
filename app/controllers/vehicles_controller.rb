@@ -16,13 +16,19 @@ class VehiclesController < ApplicationController
 
   def create
     @vehicle = Vehicles::Create.new(vehicle_params).call
-    flash[:notice] = 'Vehicle successfully created!'
-    redirect_to(new_vehicle_image_path(@vehicle))
+
+    if @vehicle.persisted?
+      flash[:notice] = 'Vehicle successfully created!'
+      redirect_to(new_vehicle_image_path(@vehicle))
+    else
+      render :new
+    end
   end
 
   def update
-    Vehicles::Update.new(@vehicle, vehicle_params).call
-    render :show
+    result = Vehicles::Update.new(@vehicle, vehicle_params).call
+
+    result ? render(:show) : render(:edit)
   end
 
   def destroy

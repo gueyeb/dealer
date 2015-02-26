@@ -7,7 +7,7 @@ module Vehicles
     end
 
     def call
-      vehicle.update! attrs
+      vehicle.update attrs
     end
 
   end
