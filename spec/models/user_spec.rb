@@ -1,4 +1,4 @@
-describe User do
+RSpec.describe User do
 
   describe 'instance methods' do
     describe '#admin?' do
