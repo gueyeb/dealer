@@ -123,6 +123,36 @@ RSpec.describe VehiclesController, type: :controller do
             expect(@vehicle.year).not_to eq(2001)
             expect(@vehicle.make).to eq('Ford')
           end
+
+          it 're-renders the edit template' do
+            patch :update, id: @vehicle.id,
+              vehicle: attributes_for(:vehicle,
+                year: 2001,
+                make: nil)
+            expect(response).to render_template(:edit)
+          end
+        end
+
+        context 'with valid attributes' do
+          it "locates the requested vehicle" do
+            patch :update, id: @vehicle.id, vehicle: attributes_for(:vehicle)
+            expect(assigns(:vehicle)).to eq(@vehicle)
+          end
+
+          it "changes @vehicle's attributes" do
+            patch :update, id: @vehicle.id,
+              vehicle: attributes_for(:vehicle,
+                year: 2001,
+                make: 'Chevy')
+            @vehicle.reload
+            expect(@vehicle.year).to eq(2001)
+            expect(@vehicle.make).to eq('Chevy')
+          end
+
+          it "redirects to the updated vehicle" do
+            patch :update, id: @vehicle, vehicle: attributes_for(:vehicle)
+            expect(response).to render_template(:show)
+          end
         end
       end
 
