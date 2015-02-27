@@ -76,9 +76,22 @@ RSpec.describe VehiclesController, type: :controller do
 
       describe 'POST #create' do
         context 'with invalid attributes' do
+          let(:invalid_attrs) {attributes_for(:vehicle).merge(year: 'a')}
+
+          it 'does not save the new vehicle in the database' do
+            expect {
+              post(:create, vehicle: invalid_attrs)
+            }.not_to change(Vehicle, :count)
+          end
+
+          it 're-renders the :new template' do
+            post(:create, vehicle: invalid_attrs)
+            expect(response).to render_template(:new)
+          end
 
         end
       end
+
     end
   end
 
