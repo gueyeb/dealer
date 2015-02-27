@@ -156,6 +156,23 @@ RSpec.describe VehiclesController, type: :controller do
         end
       end
 
+      describe 'DELETE #destroy' do
+        before :each do
+          @vehicle = create(:vehicle)
+        end
+
+        it "renders the vehicle inactive" do
+          delete :destroy, id: @vehicle.id
+          @vehicle.reload
+          expect(@vehicle.active).to be_falsey
+        end
+
+        it "redirects to the home page" do
+          delete :destroy, id: @vehicle
+          expect(response).to redirect_to(root_url)
+        end
+      end
+
     end
   end
 
