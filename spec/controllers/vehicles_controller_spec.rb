@@ -76,7 +76,7 @@ RSpec.describe VehiclesController, type: :controller do
 
       describe 'POST #create' do
         context 'with invalid attributes' do
-          let(:invalid_attrs) {attributes_for(:vehicle).merge(year: 'a')}
+          let(:invalid_attrs) { attributes_for(:vehicle).merge(year: 'a') }
 
           it 'does not save the new vehicle in the database' do
             expect {
@@ -89,6 +89,40 @@ RSpec.describe VehiclesController, type: :controller do
             expect(response).to render_template(:new)
           end
 
+        end
+      end
+
+      describe 'GET #edit' do
+        it 'assigns the requested vehicle to @vehicle' do
+          vehicle = create(:vehicle)
+          get :edit, id: vehicle.id
+          expect(assigns(:vehicle)).to eq(vehicle)
+        end
+
+        it 'renders the :edit template' do
+          vehicle = create(:vehicle)
+          get :edit, id: vehicle.id
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      describe 'PATCH #update' do
+        before(:each) do
+          @vehicle = create(:vehicle,
+            year: 2000,
+            make: 'Ford')
+        end
+
+        context 'with invalid attributes' do
+          it "does not change the vehicle's attributes" do
+            patch :update, id: @vehicle.id,
+              vehicle: attributes_for(:vehicle,
+                year: 2001,
+                make: nil)
+            @vehicle.reload
+            expect(@vehicle.year).not_to eq(2001)
+            expect(@vehicle.make).to eq('Ford')
+          end
         end
       end
 
