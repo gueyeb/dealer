@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe VehiclesController, type: :controller do
-  context 'unauthenticated actions' do
+  shared_examples 'public access to vehicles' do
     describe 'GET #index' do
       it 'renders the :index template' do
         get :index
@@ -39,141 +39,142 @@ RSpec.describe VehiclesController, type: :controller do
     end
   end
 
-  context 'authenticated actions' do
-    context 'non-admin users' do
-      {new: :get, create: :post}.each do |action, meth|
-        it "prevents non-admin users from accessing the #{action} action" do
-          send(meth, action)
-          expect(response).to redirect_to(root_url)
-          expect(flash[:error]).to match(/^You are not an admin/)
-        end
-      end
+  context 'non-admin users' do
+    it_behaves_like 'public access to vehicles'
 
-      {edit: :get, update: :patch, destroy: :delete}.each do |action, meth|
-        it "prevents non-admin users from accessing the #{action} action" do
-          vehicle = create(:vehicle)
-          send(meth, action, id: vehicle.id)
-          expect(response).to redirect_to(root_url)
-          expect(flash[:error]).to match(/^You are not an admin/)
-        end
+    {new: :get, create: :post}.each do |action, meth|
+      it "prevents non-admin users from accessing the #{action} action" do
+        send(meth, action)
+        expect(response).to redirect_to(root_url)
+        expect(flash[:error]).to match(/^You are not an admin/)
       end
     end
 
-    context 'admin users' do
-      login_admin
+    {edit: :get, update: :patch, destroy: :delete}.each do |action, meth|
+      it "prevents non-admin users from accessing the #{action} action" do
+        vehicle = create(:vehicle)
+        send(meth, action, id: vehicle.id)
+        expect(response).to redirect_to(root_url)
+        expect(flash[:error]).to match(/^You are not an admin/)
+      end
+    end
+  end
 
-      describe 'GET #new' do
-        it 'renders the :new template' do
-          get :new
+  context 'admin users' do
+    login_admin
+
+    it_behaves_like 'public access to vehicles'
+
+    describe 'GET #new' do
+      it 'renders the :new template' do
+        get :new
+        expect(response).to render_template(:new)
+      end
+
+      it 'assigns a new Vehicle to @vehicle' do
+        get :new
+        expect(assigns(:vehicle)).to be_a_new(Vehicle)
+      end
+    end
+
+    describe 'POST #create' do
+      context 'with invalid attributes' do
+        let(:invalid_attrs) { attributes_for(:vehicle).merge(year: 'a') }
+
+        it 'does not save the new vehicle in the database' do
+          expect {
+            post(:create, vehicle: invalid_attrs)
+          }.not_to change(Vehicle, :count)
+        end
+
+        it 're-renders the :new template' do
+          post(:create, vehicle: invalid_attrs)
           expect(response).to render_template(:new)
         end
 
-        it 'assigns a new Vehicle to @vehicle' do
-          get :new
-          expect(assigns(:vehicle)).to be_a_new(Vehicle)
-        end
+      end
+    end
+
+    describe 'GET #edit' do
+      it 'assigns the requested vehicle to @vehicle' do
+        vehicle = create(:vehicle)
+        get :edit, id: vehicle.id
+        expect(assigns(:vehicle)).to eq(vehicle)
       end
 
-      describe 'POST #create' do
-        context 'with invalid attributes' do
-          let(:invalid_attrs) { attributes_for(:vehicle).merge(year: 'a') }
+      it 'renders the :edit template' do
+        vehicle = create(:vehicle)
+        get :edit, id: vehicle.id
+        expect(response).to render_template(:edit)
+      end
+    end
 
-          it 'does not save the new vehicle in the database' do
-            expect {
-              post(:create, vehicle: invalid_attrs)
-            }.not_to change(Vehicle, :count)
-          end
-
-          it 're-renders the :new template' do
-            post(:create, vehicle: invalid_attrs)
-            expect(response).to render_template(:new)
-          end
-
-        end
+    describe 'PATCH #update' do
+      before(:each) do
+        @vehicle = create(:vehicle,
+          year: 2000,
+          make: 'Ford')
       end
 
-      describe 'GET #edit' do
-        it 'assigns the requested vehicle to @vehicle' do
-          vehicle = create(:vehicle)
-          get :edit, id: vehicle.id
-          expect(assigns(:vehicle)).to eq(vehicle)
+      context 'with invalid attributes' do
+        it "does not change the vehicle's attributes" do
+          patch :update, id: @vehicle.id,
+            vehicle: attributes_for(:vehicle,
+              year: 2001,
+              make: nil)
+          @vehicle.reload
+          expect(@vehicle.year).not_to eq(2001)
+          expect(@vehicle.make).to eq('Ford')
         end
 
-        it 'renders the :edit template' do
-          vehicle = create(:vehicle)
-          get :edit, id: vehicle.id
+        it 're-renders the edit template' do
+          patch :update, id: @vehicle.id,
+            vehicle: attributes_for(:vehicle,
+              year: 2001,
+              make: nil)
           expect(response).to render_template(:edit)
         end
       end
 
-      describe 'PATCH #update' do
-        before(:each) do
-          @vehicle = create(:vehicle,
-            year: 2000,
-            make: 'Ford')
+      context 'with valid attributes' do
+        it "locates the requested vehicle" do
+          patch :update, id: @vehicle.id, vehicle: attributes_for(:vehicle)
+          expect(assigns(:vehicle)).to eq(@vehicle)
         end
 
-        context 'with invalid attributes' do
-          it "does not change the vehicle's attributes" do
-            patch :update, id: @vehicle.id,
-              vehicle: attributes_for(:vehicle,
-                year: 2001,
-                make: nil)
-            @vehicle.reload
-            expect(@vehicle.year).not_to eq(2001)
-            expect(@vehicle.make).to eq('Ford')
-          end
-
-          it 're-renders the edit template' do
-            patch :update, id: @vehicle.id,
-              vehicle: attributes_for(:vehicle,
-                year: 2001,
-                make: nil)
-            expect(response).to render_template(:edit)
-          end
-        end
-
-        context 'with valid attributes' do
-          it "locates the requested vehicle" do
-            patch :update, id: @vehicle.id, vehicle: attributes_for(:vehicle)
-            expect(assigns(:vehicle)).to eq(@vehicle)
-          end
-
-          it "changes @vehicle's attributes" do
-            patch :update, id: @vehicle.id,
-              vehicle: attributes_for(:vehicle,
-                year: 2001,
-                make: 'Chevy')
-            @vehicle.reload
-            expect(@vehicle.year).to eq(2001)
-            expect(@vehicle.make).to eq('Chevy')
-          end
-
-          it "redirects to the updated vehicle" do
-            patch :update, id: @vehicle, vehicle: attributes_for(:vehicle)
-            expect(response).to render_template(:show)
-          end
-        end
-      end
-
-      describe 'DELETE #destroy' do
-        before :each do
-          @vehicle = create(:vehicle)
-        end
-
-        it "renders the vehicle inactive" do
-          delete :destroy, id: @vehicle.id
+        it "changes @vehicle's attributes" do
+          patch :update, id: @vehicle.id,
+            vehicle: attributes_for(:vehicle,
+              year: 2001,
+              make: 'Chevy')
           @vehicle.reload
-          expect(@vehicle.active).to be_falsey
+          expect(@vehicle.year).to eq(2001)
+          expect(@vehicle.make).to eq('Chevy')
         end
 
-        it "redirects to the home page" do
-          delete :destroy, id: @vehicle
-          expect(response).to redirect_to(root_url)
+        it "redirects to the updated vehicle" do
+          patch :update, id: @vehicle, vehicle: attributes_for(:vehicle)
+          expect(response).to render_template(:show)
         end
       end
-
     end
-  end
 
+    describe 'DELETE #destroy' do
+      before :each do
+        @vehicle = create(:vehicle)
+      end
+
+      it "renders the vehicle inactive" do
+        delete :destroy, id: @vehicle.id
+        @vehicle.reload
+        expect(@vehicle.active).to be_falsey
+      end
+
+      it "redirects to the home page" do
+        delete :destroy, id: @vehicle
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+  end
 end
