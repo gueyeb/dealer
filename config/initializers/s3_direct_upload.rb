@@ -5,3 +5,5 @@ S3DirectUpload.config do |c|
   c.region = "s3"
   c.url = "https://#{c.bucket}.s3.amazonaws.com/"
 end
+
+ap S3DirectUpload.config
