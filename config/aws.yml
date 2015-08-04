@@ -9,4 +9,5 @@ test:
   <<: *defaults
   bucket: "dealer-test"
 production:
+  <<: *defaults
   bucket: "dealer-production"
