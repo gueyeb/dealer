@@ -2,11 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.2.4'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 
 # views
 gem 'sass-rails'
-gem 'compass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jbuilder'

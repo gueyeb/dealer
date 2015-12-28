@@ -16,7 +16,7 @@ class Image < ActiveRecord::Base
     styles: {:medium => "300x300>", :thumb => "100x100>"},
     default_url: "/images/:style/missing.png"
 
-  validates :direct_upload_url, presence: true, format: {with: DIRECT_UPLOAD_URL_FORMAT}
+  validates :direct_upload_url, presence: true #, format: {with: DIRECT_UPLOAD_URL_FORMAT}
   validates :vehicle_id, presence: true
   validates_attachment :image, content_type: {content_type: ["image/jpeg", "image/gif", "image/png"]}
 

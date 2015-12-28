@@ -4,6 +4,14 @@
 #   So I can protect my account from unauthorized access
 RSpec.feature 'Sign out', :devise do
 
+  before(:each) do
+    ActionController::Base.allow_forgery_protection = false
+  end
+
+  after(:each) do
+    ActionController::Base.allow_forgery_protection = true
+  end
+
   # Scenario: User signs out successfully
   #   Given I am signed in
   #   When I sign out
