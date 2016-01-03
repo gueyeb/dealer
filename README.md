@@ -17,9 +17,9 @@ car brokerage business)
 Dependencies
 -------------
 
-This application requires:
+This application is using:
 
-- Ruby 2.2.x (MRI, not JRuby or Rubinius)
+- Ruby 2.3.x (MRI, not JRuby or Rubinius)
 - Rails 4.2.x
 
 This application is developed and tested with the following:
