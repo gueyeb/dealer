@@ -1,0 +1,43 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "8d592e16d5f5c7e97dcc90de2dfc5ec4cf4481b0c9408f13c359f029941e97bf",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/images_controller.rb",
+      "line": 21,
+      "link": "http://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Image.find(params[:id]).image.expiring_url(30.seconds, :original))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ImagesController",
+        "method": "download"
+      },
+      "user_input": "Image.find(params[:id]).image.expiring_url(30.seconds, :original)",
+      "confidence": "High",
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
+      "fingerprint": "483a0ee4961be774de1fa13cf8edc3be9a4c8a1d03179530ab344a9c6f665489",
+      "message": "Render path contains parameter value",
+      "file": "app/views/images/create.js.erb",
+      "line": 3,
+      "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => Images::Create.new(Vehicle.find(params[:vehicle_id]), image_params.merge(:primary => params[:primary])).call, {})",
+      "render_path": [{"type":"controller","class":"ImagesController","method":"create","line":13,"file":"app/controllers/images_controller.rb"}],
+      "location": {
+        "type": "template",
+        "template": "images/create"
+      },
+      "user_input": "params[:primary]",
+      "confidence": "Weak",
+      "note": ""
+    }
+  ],
+  "updated": "2016-01-03 07:45:04 -0700",
+  "brakeman_version": "3.1.4"
+}
