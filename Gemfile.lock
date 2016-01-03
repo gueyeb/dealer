@@ -37,11 +37,11 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    annotate (2.6.10)
-      activerecord (>= 3.2, <= 4.3)
+    annotate (2.7.0)
+      activerecord (>= 3.2, < 6.0)
       rake (~> 10.4)
     arel (6.0.3)
-    autoprefixer-rails (6.2.2)
+    autoprefixer-rails (6.2.3)
       execjs
       json
     awesome_print (1.6.1)
@@ -228,7 +228,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.1)
-      json (~> 1.4)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
     rollbar (2.7.1)
