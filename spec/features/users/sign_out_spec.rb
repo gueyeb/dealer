@@ -3,7 +3,6 @@
 #   I want to sign out
 #   So I can protect my account from unauthorized access
 RSpec.feature 'Sign out', :devise do
-
   before(:each) do
     ActionController::Base.allow_forgery_protection = false
   end
@@ -23,7 +22,4 @@ RSpec.feature 'Sign out', :devise do
     click_link 'Sign out'
     expect(page).to have_content I18n.t 'devise.sessions.signed_out'
   end
-
 end
-
-

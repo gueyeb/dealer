@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "vehicles/show", type: :view do
+RSpec.describe 'vehicles/show', type: :view do
   before(:each) do
     @vehicle = assign(:vehicle, create(:vehicle))
   end
 
-  it "renders attributes" do
+  it 'renders attributes' do
     render
     expect(rendered).to match(/Vin/)
     expect(rendered).to match(/Exterior Color/)

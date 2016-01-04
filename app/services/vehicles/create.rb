@@ -12,6 +12,5 @@ module Vehicles
       vehicle.save
       vehicle
     end
-
   end
 end

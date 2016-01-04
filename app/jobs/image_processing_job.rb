@@ -35,5 +35,4 @@ class ImageProcessingJob < ActiveJob::Base
       end
     end
   end
-
 end

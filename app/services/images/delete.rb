@@ -14,6 +14,5 @@ module Images
       # delete the object
       image.destroy!
     end
-
   end
 end

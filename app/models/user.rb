@@ -5,14 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def admin?
-    email == ENV["ADMIN_EMAIL"]
+    email == ENV['ADMIN_EMAIL']
   end
 
   # https://github.com/plataformatec/devise#activejob-integration
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
   end
-
 end
 
 # == Schema Information

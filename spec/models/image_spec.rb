@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Image, :type => :model do
-
+RSpec.describe Image, type: :model do
   describe 'validations' do
     [:direct_upload_url, :vehicle_id].each do |attr|
       it "is invalid when #{attr} is not provided" do
@@ -15,8 +14,8 @@ RSpec.describe Image, :type => :model do
   describe 'instance methods' do
     describe 'direct_upload_url=' do
       it 'unescapes the direct_upload_url provided by S3' do
-        escaped_url = "https://dealer-test.s3.amazonaws.com%2Fuploads%2F1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497%2F2015_01_01_006.jpg"
-        unescaped_url = "https://dealer-test.s3.amazonaws.com/uploads/1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497/2015_01_01_006.jpg"
+        escaped_url = 'https://dealer-test.s3.amazonaws.com%2Fuploads%2F1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497%2F2015_01_01_006.jpg'
+        unescaped_url = 'https://dealer-test.s3.amazonaws.com/uploads/1423161982068-6clk2y1fau6ry66r-b06ac5c310fd6c71c31b56bfca540497/2015_01_01_006.jpg'
         image = build(:image, direct_upload_url: escaped_url)
         expect(image.direct_upload_url).to eq(unescaped_url)
       end
@@ -34,7 +33,6 @@ RSpec.describe Image, :type => :model do
       end
     end
   end
-
 end
 
 # == Schema Information

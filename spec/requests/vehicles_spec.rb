@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Vehicles", type: :request do
-  describe "GET /vehicles" do
-    it "provides an HTTP 200 status response" do
+RSpec.describe 'Vehicles', type: :request do
+  describe 'GET /vehicles' do
+    it 'provides an HTTP 200 status response' do
       get vehicles_path
       expect(response).to have_http_status(200)
     end

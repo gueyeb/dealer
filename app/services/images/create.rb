@@ -3,7 +3,8 @@ module Images
     attr_reader :vehicle, :image_attrs
 
     def initialize(vehicle, image_attrs)
-      @vehicle, @image_attrs = vehicle, image_attrs
+      @vehicle = vehicle
+      @image_attrs = image_attrs
     end
 
     def call
@@ -13,6 +14,5 @@ module Images
       ImageProcessingJob.perform_later image
       image
     end
-
   end
 end

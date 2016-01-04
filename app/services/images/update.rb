@@ -3,7 +3,8 @@ module Images
     attr_reader :image, :attrs
 
     def initialize(image, attrs)
-      @image, @attrs = image, attrs
+      @image = image
+      @attrs = attrs
     end
 
     def call
@@ -15,6 +16,5 @@ module Images
       ImageProcessingJob.perform_later image
       image
     end
-
   end
 end

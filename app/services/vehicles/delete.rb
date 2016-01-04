@@ -9,6 +9,5 @@ module Vehicles
     def call
       vehicle.update! active: false
     end
-
   end
 end

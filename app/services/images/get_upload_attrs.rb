@@ -29,6 +29,5 @@ module Images
         raise e
       end
     end
-
   end
 end

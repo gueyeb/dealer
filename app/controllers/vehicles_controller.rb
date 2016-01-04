@@ -1,5 +1,4 @@
 class VehiclesController < ApplicationController
-
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   before_action :ensure_active_vehicle, only: [:show, :edit, :update]
   before_action :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
@@ -40,11 +39,9 @@ class VehiclesController < ApplicationController
   private
 
   def set_vehicle
-    begin
-      @vehicle = Vehicle.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      invalid_vehicle_redirect
-    end
+    @vehicle = Vehicle.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    invalid_vehicle_redirect
   end
 
   def ensure_active_vehicle
@@ -57,9 +54,8 @@ class VehiclesController < ApplicationController
   end
 
   def vehicle_params
-    params.
-      require(:vehicle).
-      permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments, :asking_price)
+    params
+      .require(:vehicle)
+      .permit(:vin, :year, :make, :model, :trim, :mileage, :exterior_color, :interior_color, :interior_material, :transmission, :body_style, :drivetrain, :engine, :options, :comments, :asking_price)
   end
-
 end

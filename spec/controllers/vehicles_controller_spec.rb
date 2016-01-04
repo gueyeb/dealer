@@ -42,7 +42,7 @@ RSpec.describe VehiclesController, type: :controller do
   context 'non-admin users' do
     it_behaves_like 'public access to vehicles'
 
-    {new: :get, create: :post}.each do |action, meth|
+    { new: :get, create: :post }.each do |action, meth|
       it "prevents non-admin users from accessing the #{action} action" do
         send(meth, action)
         expect(response).to redirect_to(root_url)
@@ -50,7 +50,7 @@ RSpec.describe VehiclesController, type: :controller do
       end
     end
 
-    {edit: :get, update: :patch, destroy: :delete}.each do |action, meth|
+    { edit: :get, update: :patch, destroy: :delete }.each do |action, meth|
       it "prevents non-admin users from accessing the #{action} action" do
         vehicle = create(:vehicle)
         send(meth, action, id: vehicle.id)
@@ -82,16 +82,15 @@ RSpec.describe VehiclesController, type: :controller do
         let(:invalid_attrs) { attributes_for(:vehicle).merge(year: 'a') }
 
         it 'does not save the new vehicle in the database' do
-          expect {
+          expect do
             post(:create, vehicle: invalid_attrs)
-          }.not_to change(Vehicle, :count)
+          end.not_to change(Vehicle, :count)
         end
 
         it 're-renders the :new template' do
           post(:create, vehicle: invalid_attrs)
           expect(response).to render_template(:new)
         end
-
       end
     end
 
@@ -112,16 +111,16 @@ RSpec.describe VehiclesController, type: :controller do
     describe 'PATCH #update' do
       before(:each) do
         @vehicle = create(:vehicle,
-          year: 2000,
-          make: 'Ford')
+                          year: 2000,
+                          make: 'Ford')
       end
 
       context 'with invalid attributes' do
         it "does not change the vehicle's attributes" do
           patch :update, id: @vehicle.id,
-            vehicle: attributes_for(:vehicle,
-              year: 2001,
-              make: nil)
+                         vehicle: attributes_for(:vehicle,
+                                                 year: 2001,
+                                                 make: nil)
           @vehicle.reload
           expect(@vehicle.year).not_to eq(2001)
           expect(@vehicle.make).to eq('Ford')
@@ -129,30 +128,30 @@ RSpec.describe VehiclesController, type: :controller do
 
         it 're-renders the edit template' do
           patch :update, id: @vehicle.id,
-            vehicle: attributes_for(:vehicle,
-              year: 2001,
-              make: nil)
+                         vehicle: attributes_for(:vehicle,
+                                                 year: 2001,
+                                                 make: nil)
           expect(response).to render_template(:edit)
         end
       end
 
       context 'with valid attributes' do
-        it "locates the requested vehicle" do
+        it 'locates the requested vehicle' do
           patch :update, id: @vehicle.id, vehicle: attributes_for(:vehicle)
           expect(assigns(:vehicle)).to eq(@vehicle)
         end
 
         it "changes @vehicle's attributes" do
           patch :update, id: @vehicle.id,
-            vehicle: attributes_for(:vehicle,
-              year: 2001,
-              make: 'Chevy')
+                         vehicle: attributes_for(:vehicle,
+                                                 year: 2001,
+                                                 make: 'Chevy')
           @vehicle.reload
           expect(@vehicle.year).to eq(2001)
           expect(@vehicle.make).to eq('Chevy')
         end
 
-        it "redirects to the updated vehicle" do
+        it 'redirects to the updated vehicle' do
           patch :update, id: @vehicle, vehicle: attributes_for(:vehicle)
           expect(response).to render_template(:show)
         end
@@ -164,17 +163,16 @@ RSpec.describe VehiclesController, type: :controller do
         @vehicle = create(:vehicle)
       end
 
-      it "renders the vehicle inactive" do
+      it 'renders the vehicle inactive' do
         delete :destroy, id: @vehicle.id
         @vehicle.reload
         expect(@vehicle.active).to be_falsey
       end
 
-      it "redirects to the home page" do
+      it 'redirects to the home page' do
         delete :destroy, id: @vehicle
         expect(response).to redirect_to(root_url)
       end
     end
-
   end
 end

@@ -1,5 +1,4 @@
 class ImagesController < ApplicationController
-
   before_action :set_image, only: [:destroy, :download]
   before_action :set_vehicle, except: [:download]
   before_action :ensure_admin, only: [:new, :create, :download]
@@ -34,5 +33,4 @@ class ImagesController < ApplicationController
   def set_vehicle
     @vehicle = Vehicle.find(params[:vehicle_id])
   end
-
 end

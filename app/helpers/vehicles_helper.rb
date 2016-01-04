@@ -1,5 +1,4 @@
 module VehiclesHelper
-
   def vehicle_main_image(vehicle)
     image = vehicle.primary_image || vehicle.images.first
     image.image.url(:medium)
@@ -19,5 +18,4 @@ module VehiclesHelper
 
     images
   end
-
 end

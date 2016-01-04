@@ -1,5 +1,4 @@
 RSpec.describe User do
-
   describe 'instance methods' do
     describe '#admin?' do
       it 'should indicate that a user is NOT an admin' do
@@ -13,7 +12,6 @@ RSpec.describe User do
       end
     end
   end
-
 end
 
 # == Schema Information

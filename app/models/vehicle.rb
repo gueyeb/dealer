@@ -1,8 +1,7 @@
 class Vehicle < ActiveRecord::Base
-
   has_many :images
 
-  monetize :asking_price_cents, allow_nil: true, numericality: {greater_than_or_equal_to: 0}
+  monetize :asking_price_cents, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
 
   validates_presence_of :vin, :year, :make, :model
   validates_numericality_of :year, greater_than_or_equal_to: 1900, less_than: 2050
@@ -12,7 +11,7 @@ class Vehicle < ActiveRecord::Base
   scope :active, -> { where(active: true) }
 
   def primary_image
-    images.where(primary: true).first
+    images.find_by(primary: true)
   end
 
   def has_primary_image?
@@ -22,7 +21,6 @@ class Vehicle < ActiveRecord::Base
   def non_primary_images
     images.where(primary: false)
   end
-
 end
 
 # == Schema Information

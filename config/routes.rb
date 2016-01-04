@@ -15,5 +15,4 @@ Rails.application.routes.draw do
 
   resources :vehicles, only: [:index, :show]
   resources :contacts, only: [:new, :create]
-
 end

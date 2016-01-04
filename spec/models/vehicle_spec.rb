@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'money-rails/test_helpers'
 include MoneyRails::TestHelpers
 
-RSpec.describe Vehicle, :type => :model do
+RSpec.describe Vehicle, type: :model do
   it 'should monetize the various prices' do
     vehicle = build(:vehicle, asking_price: 1000)
     expect(vehicle).to monetize(:asking_price_cents)
