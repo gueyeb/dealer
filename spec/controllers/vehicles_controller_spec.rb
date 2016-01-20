@@ -163,14 +163,31 @@ RSpec.describe VehiclesController, type: :controller do
         @vehicle = create(:vehicle)
       end
 
-      it 'renders the vehicle inactive' do
+      it 'deletes the vehicle' do
+        expect(Vehicle.count).to be(1)
         delete :destroy, id: @vehicle.id
+        expect(Vehicle.count).to be(0)
+      end
+
+      it 'redirects to the home page' do
+        delete :destroy, id: @vehicle
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    describe 'PATCH #archive' do
+      before :each do
+        @vehicle = create(:vehicle)
+      end
+
+      it 'renders the vehicle inactive' do
+        patch :archive, id: @vehicle.id
         @vehicle.reload
         expect(@vehicle.active).to be_falsey
       end
 
       it 'redirects to the home page' do
-        delete :destroy, id: @vehicle
+        patch :archive, id: @vehicle
         expect(response).to redirect_to(root_url)
       end
     end
