@@ -1,5 +1,5 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy, :archive]
   before_action :ensure_active_vehicle, only: [:show, :edit, :update]
   before_action :ensure_admin, only: [:new, :create, :edit, :update, :destroy]
 
@@ -32,7 +32,13 @@ class VehiclesController < ApplicationController
 
   def destroy
     Vehicles::Delete.new(@vehicle).call
-    flash[:notice] = 'Vehicle has been removed from inventory.'
+    flash[:notice] = 'Vehicle has been completely removed.'
+    redirect_to root_path
+  end
+
+  def archive
+    Vehicles::Archive.new(@vehicle).call
+    flash[:notice] = 'Vehicle has been archived and will no longer be shown to customers.'
     redirect_to root_path
   end
 

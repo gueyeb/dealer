@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :vehicles, only: [:new, :create, :edit, :update, :destroy] do
+      member do
+        patch :archive
+      end
       resources :images, only: [:new, :create, :destroy] do
         member do
           get :download

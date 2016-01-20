@@ -66,7 +66,40 @@
   </div>
 </div>
 
-<% if user_signed_in? %>
-  <%= link_to 'Edit Vehicle', edit_vehicle_path(@vehicle) %> |
+<div class="row">
+  <%= link_to vehicles_path, class: "btn btn-default" do %>
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to Vehicles List
+  <% end %>
+  <% if current_user&.admin? %>
+    <%= link_to edit_vehicle_path(@vehicle), class: "btn btn-primary" do %>
+      <i class="fa fa-pencil"></i> Edit Vehicle
+    <% end %>
+    <%= link_to archive_vehicle_path(@vehicle), method: :patch, class: "btn btn-warning" do %>
+      <i class="fa fa-times"></i> Archive Vehicle
+    <% end %>
+    <%= link_to vehicle_path(@vehicle), method: :delete, class: "btn btn-danger" do %>
+      <i class="fa fa-trash-o"></i> Delete Vehicle
+    <% end %>
+  <% end %>
+</div>
+
+<% if current_user&.admin? %>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <dl class="dl-horizontal">
+      <dt>Archive</dt>
+      <dd>
+        This prevents customers from viewing this vehicle on the website but does not remove the record of the vehicle
+        from the database. This action is typically taken when a vehicle is sold.
+      </dd>
+      <dt>Delete</dt>
+      <dd>
+        This prevents customers from viewing this vehicle on the website and completely removes the reocrd of the
+        vehicle from the database. This action is typically taken for "test" vehicles or vehicles that do not go through the
+        normal sales process (and thus should not be recorded).
+      </dd>
+    </dl>
+  </div>
 <% end %>
-<%= link_to 'Back to Vehicles List', vehicles_path %>

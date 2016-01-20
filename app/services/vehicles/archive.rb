@@ -1,5 +1,5 @@
 module Vehicles
-  class Delete
+  class Archive
     attr_reader :vehicle
 
     def initialize(vehicle)
@@ -7,10 +7,7 @@ module Vehicles
     end
 
     def call
-      vehicle.images.each do |image|
-        Images::Delete.new(image).call
-      end
-      vehicle.destroy!
+      vehicle.update! active: false
     end
   end
 end

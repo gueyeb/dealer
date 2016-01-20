@@ -12,20 +12,22 @@ class Image < ActiveRecord::Base
   belongs_to :vehicle
 
   has_attached_file :image,
-                    styles: { medium: '300x300>', thumb: '100x100>' },
+                    styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: '/images/:style/missing.png'
 
   validates :direct_upload_url, presence: true # , format: {with: DIRECT_UPLOAD_URL_FORMAT}
   validates :vehicle_id, presence: true
-  validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
+  validates_attachment :image, content_type: {content_type: ['image/jpeg', 'image/gif', 'image/png']}
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
-    self[:direct_upload_url] = (begin
-                                           CGI.unescape(escaped_url)
-                                         rescue
-                                           nil
-                                         end)
+    self[:direct_upload_url] = (
+      begin
+        CGI.unescape(escaped_url)
+      rescue
+        nil
+      end
+    )
   end
 
   # Determines if file requires post-processing (image resizing, etc)
