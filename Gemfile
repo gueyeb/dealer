@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.0'
 
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 
 # views
 gem 'sass-rails'
@@ -28,7 +28,7 @@ gem 'rack-timeout'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
-gem 'sucker_punch'
+gem 'sucker_punch', '1.6.0' # upgrade 2.0 with Rails 5: https://github.com/brandonhilkert/sucker_punch/issues/159
 gem 'money-rails'
 
 group :development do
