@@ -67,15 +67,16 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.mandrillapp.com',
-    port: 587,
-    domain: ENV['DOMAIN_NAME'],
-    authentication: 'plain',
-    enable_starttls_auto: true,
-    user_name: ENV['MANDRILL_USERNAME'],
-    password: ENV['MANDRILL_APIKEY']
+  ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => '587',
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => 'heroku.com',
+      :enable_starttls_auto => true
   }
+  
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: ENV['DOMAIN_NAME'] }
   config.action_mailer.delivery_method = :smtp
