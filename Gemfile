@@ -23,12 +23,12 @@ gem 'annotate'
 
 # other
 gem 'devise'
-gem 'puma'
+gem 'puma', '~> 2.16.0'
 gem 'rack-timeout'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
-gem 'sucker_punch', '1.6.0' # upgrade 2.0 with Rails 5: https://github.com/brandonhilkert/sucker_punch/issues/159
+gem 'sucker_punch', '~> 1.6.0' # upgrade 2.0 with Rails 5: https://github.com/brandonhilkert/sucker_punch/issues/159
 gem 'money-rails'
 
 group :development do

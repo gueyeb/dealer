@@ -76,7 +76,7 @@ Rails.application.configure do
       :domain         => 'heroku.com',
       :enable_starttls_auto => true
   }
-  
+
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: ENV['DOMAIN_NAME'] }
   config.action_mailer.delivery_method = :smtp
