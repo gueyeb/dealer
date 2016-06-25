@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default to: 'moffittmotorsinc@gmail.com'
+  default to: 'tucker.merz@gmail.com'
 
   def contact_us(contact)
     @contact = contact
