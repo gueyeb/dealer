@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Contacts', type: :feature do
   scenario 'Filling in the contact form' do
     visit '/contacts/new'
-    expect(page).to have_content 'For more information contact Tucker. 303-304-1081'
+    expect(page).to have_content 'For more information contact Tucker.'
+    expect(page).to have_content '303-304-1081'
 
     within('#new_contact') do
       fill_in 'Name', with: 'John Doe'
