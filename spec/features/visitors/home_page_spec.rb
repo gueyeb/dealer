@@ -9,6 +9,9 @@ RSpec.feature 'Home page' do
   #   Then I see "Welcome"
   scenario 'visit the home page' do
     visit root_path
-    expect(page).to have_content 'Vehicles For Sale'
+    expect(page).to have_content 'Home'
+    expect(page).to have_content 'Inventory'
+    expect(page).to have_content 'Contact Us'
+    expect(page).to have_content 'About'
   end
 end
