@@ -6,7 +6,7 @@
       callback_param: "image[direct_upload_url]",
       expiration: 24.hours.from_now.utc.iso8601,
       max_file_size: 10.megabytes do %>
-      <%= file_field_tag :file, multiple: !local_assigns[:primary] %>
+      <%= file_field_tag :file, multiple: !local_assigns[:primary], accept: 'image/*', capture: 'camera' %>
     <% end %>
   </div>
 </div>
