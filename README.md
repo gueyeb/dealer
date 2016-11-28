@@ -20,11 +20,11 @@ Dependencies
 This application is using:
 
 - Ruby 2.3.x (MRI, not JRuby or Rubinius)
-- Rails 4.2.x
+- Rails 5.x
 
 This application is developed and tested with the following:
 
-- PostgreSQL 9.4.x (latest)
+- PostgreSQL 9.x
 
 This application has been designed to be deployed to Heroku (primarily through using the
 [rails_12factor](https://github.com/heroku/rails_12factor) gem).  It should not be difficult to deploy this to other
