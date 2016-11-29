@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'rails', '~> 4.2.7.1'
+gem 'rails', '5.0.0.1'
 
 # views
 gem 'sass-rails'
@@ -28,15 +28,16 @@ gem 'rack-timeout'
 gem 'awesome_print'
 gem 'newrelic_rpm'
 gem 'rollbar'
-gem 'sucker_punch', '~> 1.6.0' # upgrade 2.0 with Rails 5: https://github.com/brandonhilkert/sucker_punch/issues/159
+gem 'sucker_punch'
 gem 'money-rails'
 gem 'rake'
+gem 'rb-readline' # https://github.com/rails/rails/issues/26658
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'foreman'
-  gem 'quiet_assets'
+  gem 'thor', '0.19.1' # https://github.com/ddollar/foreman/issues/653
   gem 'rails_layout'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -57,6 +58,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'rubocop', require: false
 end
 

@@ -5,19 +5,19 @@
 #
 # Article: http://helabs.com/blog/2014/02/21/how-to-upload-big-files-to-amazon-s3-through-heroku/
 # Code: https://github.com/aliismayilov/bigphotoblog
-class Image < ActiveRecord::Base
+class Image < ApplicationRecord
   BUCKET_NAME = Rails.configuration.aws[:bucket]
-  DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/#{BUCKET_NAME}.s3\.amazonaws\.com\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
+  DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/#{BUCKET_NAME}.s3\.amazonaws\.com\/(?<path>uploads\/.+\/(?<filename>.+))\z}
 
   belongs_to :vehicle
 
   has_attached_file :image,
-                    styles: {medium: '300x300>', thumb: '100x100>'},
+                    styles: { medium: '300x300>', thumb: '100x100>' },
                     default_url: '/images/:style/missing.png'
 
   validates :direct_upload_url, presence: true # , format: {with: DIRECT_UPLOAD_URL_FORMAT}
   validates :vehicle_id, presence: true
-  validates_attachment :image, content_type: {content_type: ['image/jpeg', 'image/gif', 'image/png']}
+  validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
